@@ -75,6 +75,33 @@
                          </div>
                      </div>
 
+                    <!-- EXPLANATION DETAIL -->
+                    <div class="WorkflowResults-resultRow" ng-show="workflow.job_explanation">
+                        <label class="WorkflowResults-resultRowLabel">
+                            {{ strings.labels.JOB_EXPLANATION }}
+                        </label>
+
+                        <div class="WorkflowResults-resultRowText"
+                            ng-show="!job_explanation.showMore">
+                            {{ job_explanation.less }}
+                            <span ng-show="job_explanation.hasMoreToShow">...</span>
+                            <span ng-show="job_explanation.hasMoreToShow"
+                                class="WorkflowResults-seeMoreLess"
+                                ng-click="job_explanation.showMore = true">
+                                {{ strings.details.SHOW_MORE }}
+                            </span>
+                        </div>
+
+                        <div class="WorkflowResults-resultRowText"
+                            ng-show="job_explanation.showMore">
+                            {{ job_explanation.more }}
+                            <span class="WorkflowResults-seeMoreLess"
+                                ng-click="job_explanation.showMore = false">
+                                {{ strings.details.SHOW_LESS }}
+                            </span>
+                        </div>
+                    </div>
+
                     <!-- START TIME DETAIL -->
                     <div class="WorkflowResults-resultRow"
                         ng-show="workflow.started">
@@ -144,18 +171,31 @@
                         </div>
                     </div>
 
-                    <!-- SLIIIIIICE -->
+                  <!-- SLIIIIIICE -->
+                  <div class="WorkflowResults-resultRow"
+                      ng-show="workflow.summary_fields.job_template.name">
+                      <label
+                          class="WorkflowResults-resultRowLabel">
+                          {{ strings.labels.SLICE_TEMPLATE }}
+                      </label>
+                      <div class="WorkflowResults-resultRowText">
+                          <a href="{{ slice_job_template_link }}"
+                              aw-tool-tip="{{ strings.tooltips.EDIT_SLICE_TEMPLATE }}"
+                              data-placement="top">
+                              {{ workflow.summary_fields.job_template.name }}
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- PARENT WORKFLOW DETAIL -->
                     <div class="WorkflowResults-resultRow"
-                        ng-show="workflow.summary_fields.job_template.name">
-                        <label
-                            class="WorkflowResults-resultRowLabel">
-                            {{ strings.labels.SLICE_TEMPLATE }}
+                        ng-if="workflow.summary_fields.source_workflow_job">
+                        <label class="WorkflowResults-resultRowLabel">
+                            {{ strings.labels.SOURCE_WORKFLOW_JOB }}
                         </label>
                         <div class="WorkflowResults-resultRowText">
-                            <a href="{{ slice_job_template_link }}"
-                                aw-tool-tip="{{ strings.tooltips.EDIT_SLICE_TEMPLATE }}"
-                                data-placement="top">
-                                {{ workflow.summary_fields.job_template.name }}
+                            <a href="{{ source_workflow_job_link }}">
+                                {{ workflow.summary_fields.source_workflow_job.name }}
                             </a>
                         </div>
                     </div>
