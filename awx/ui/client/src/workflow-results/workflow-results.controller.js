@@ -105,6 +105,9 @@ export default ['workflowData', 'workflowResultsService', 'workflowDataOptions',
             $scope.labels = jobLabels;
             $scope.count = count.val;
             $scope.showManualControls = false;
+            $scope.showKey = false;
+            $scope.toggleKey = () => $scope.showKey = !$scope.showKey;
+            $scope.keyClassList = `{ 'Key-menuIcon--active': showKey }`;
 
             // Start elapsed time updater for job known to be running
             if ($scope.workflow.started !== null && $scope.workflow.status === 'running') {
